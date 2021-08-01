@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Export XML</title>
+</head>
+<body>
+    <a th:href="@{/}">Go back to the main page</a>
+
+    <div th:if="${#bools.isFalse(checkAndMakeOutDirs)}">
+        <p class="nothing-added">There is a problem with the out directories! Please check them and try again!</p>
+    </div>
+
+    <div th:if="${#bools.isFalse(checkIfThereAreRecordsInTheDatabase)}">
+        <p class="nothing-added">Export was not made because there are no records in the database!</p>
+    </div>
+</body>
+</html>

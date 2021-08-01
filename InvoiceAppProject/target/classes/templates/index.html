@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+<head>
+    <title>Sample spring application</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: centre;
+            padding: 8px;
+        }
+
+</style>
+
+</head>
+<body>
+
+<a th:href="@{/exportCSV}">Export data to CSV format by buyer</a>
+<a th:href="@{/exportXML}">Export data to XML format by buyer</a>
+
+<div th:if="${#lists.isEmpty(invoiceList)}">
+    <p class="nothing-added">There are no records in the database</p>
+</div>
+
+<div th:if="${#bools.isFalse(checkIfInDirAndFileExist)}">
+    <p class="nothing-added">There is a problem with the in directory or with the in file! Please check them and try again!</p>
+</div>
+
+<div class="box">
+    <div th:if="${not #lists.isEmpty(invoiceList)}">
+        <div class="scrollbar">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Buyer</th>
+                    <th>Image Name</th>
+                    <th>Invoice Due Date</th>
+                    <th>Invoice Number</th>
+                    <th>Invoice Amount</th>
+                    <th>Invoice Currency</th>
+                    <th>Invoice Status</th>
+                    <th>Supplier</th>
+                </tr>
+                <tr th:each="invoice : ${invoiceList}">
+                    <td th:text="${invoice.id}"></td>
+                    <td th:text="${invoice.buyer}"></td>
+                    <td th:text="${invoice.imageName}"></td>
+                    <td th:text="${invoice.invoiceDueDate}"></td>
+                    <td th:text="${invoice.invoiceNumber}"></td>
+                    <td th:text="${invoice.invoiceAmount}"></td>
+                    <td th:text="${invoice.invoiceCurrency}"></td>
+                    <td th:text="${invoice.invoiceStatus}"></td>
+                    <td th:text="${invoice.supplier}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
